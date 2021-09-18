@@ -22,9 +22,10 @@ namespace Unprogressed.Player
 
         //[SerializeField] private UI _ui;
 
-        private Inventory.Inventory _inventory;
         internal StateManager _stateManager;
         internal Animator _animator;
+
+        private Inventory.Inventory _inventory;
         private Rigidbody _rigidbody;
         private bool _isPressedJump = false;
         #endregion

@@ -15,8 +15,8 @@ namespace Unprogressed.Player
 
         void Awake()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
         }
 
         void FixedUpdate()

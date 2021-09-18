@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6640e6967638a94c8ef73852ba881cd, type: 3}
-  m_Name: 1_Sword
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  _id: 1
-  _name: Sword
-  _description: Its sharp knife
-  _icon: {fileID: 21300000, guid: 490de5b67a54a914088038c8d2c8282f, type: 3}
+  _title: Axe
+  _description: Destroy all trees!
+  _icon: {fileID: 21300000, guid: 7eaf3bc9665b03740be9349771cf2c9a, type: 3}
   _type: 1
-  _model: {fileID: 0}
