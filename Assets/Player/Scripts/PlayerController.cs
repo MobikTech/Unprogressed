@@ -25,7 +25,7 @@ namespace Unprogressed.Player
         internal StateManager _stateManager;
         internal Animator _animator;
 
-        private Inventory.Inventory _inventory;
+        internal Inventory.Inventory _inventory;
         private Rigidbody _rigidbody;
         private bool _isPressedJump = false;
         #endregion

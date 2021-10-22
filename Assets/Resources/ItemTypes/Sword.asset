@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6640e6967638a94c8ef73852ba881cd, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  _id: 2
   _title: Sword
   _description: Its sharp knife
   _icon: {fileID: 21300000, guid: 3a0f5f612370afb48b1c83f2a5d0773e, type: 3}

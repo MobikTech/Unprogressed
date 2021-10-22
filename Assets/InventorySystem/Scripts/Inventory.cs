@@ -7,20 +7,23 @@ namespace Unprogressed.Inventory
 {
     public class Inventory
     {
-        private int _panelSlotAmount = 10;
-        //private Dictionary<GameObject, Item> _items;
+        private const int _panelSlotAmount = 10;
         private Slot[] _slots;
 
-       
-        public Inventory()
+        public Inventory() => InitializeInventory();
+        
+        //todo
+        /// <summary>
+        /// Change finding method of item panel slots to method without byName finding
+        /// </summary>
+        private void InitializeInventory()
         {
             _slots = new Slot[_panelSlotAmount];
-            ///Change finding method of item panel slots to method without byName finding
             ItemDragHandler[] imageObjectComponents = UI.MainCanvas.transform.Find("ItemPanel").GetComponentsInChildren<ItemDragHandler>();
             for (int i = 0; i < _slots.Length; i++)
             {
                 _slots[i] = new Slot(imageObjectComponents[i].gameObject.GetComponent<Image>());
-            }   
+            }
         }
         public bool AddItem(Item item)
         {

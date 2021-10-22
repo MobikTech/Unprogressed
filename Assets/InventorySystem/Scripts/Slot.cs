@@ -1,4 +1,5 @@
 ﻿using UnityEngine.UI;
+using UnityEngine;
 
 namespace Unprogressed.Inventory
 {
@@ -14,11 +15,11 @@ namespace Unprogressed.Inventory
         {
             _image = imageOnUI;
             ResetImage();
-            //_image.sprite = Common.ItemGenerator.ItemInfoList[ItemType.None].Icon;
         }
         public void ChangeItem(Item item)
         {
             _item = item;
+            _image.color = Color.white;
             _image.sprite = item.ItemInfo.Icon;
         }
         public Item DropItem()
@@ -26,12 +27,23 @@ namespace Unprogressed.Inventory
             Item item = _item;
             _item = null;
             ResetImage();
-            //_image.sprite = Common.ItemGenerator.ItemInfoList[ItemType.None].Icon;
             return item;
+        }
+        public void SwapItems(Slot slot)
+        {
+            Item thisItem = this._item;
+            Image thisImage = this._image;
+
+            this._item = slot._item;
+            slot._item = thisItem;
+
+            this._image = slot._image;
+            slot._image = thisImage;
         }
         private void ResetImage()
         {
             _image.sprite = null;
+            _image.color = Color.clear;
         }
     }
 }

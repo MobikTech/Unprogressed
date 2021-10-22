@@ -15,6 +15,9 @@ namespace Unprogressed.Common
         //    InitializeItemList();
         //}
 
+        /// <summary>
+        /// Need refactor, problem with id compability
+        /// </summary>
         [RuntimeInitializeOnLoadMethod]
         private static void InitializeItemList()
         {
@@ -35,7 +38,7 @@ namespace Unprogressed.Common
         //{
         //    return GameObject.Instantiate<GameObject>(ItemInfoList[0].Prefab, spawnPoint, Quaternion.identity);
         //}
-
+        public static Item GenerateItem(ItemAsset asset) => new Item(asset);
     }
 
 }
