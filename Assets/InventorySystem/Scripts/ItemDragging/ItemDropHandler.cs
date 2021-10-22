@@ -1,27 +1,29 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Unprogressed.Inventory
 {
     public class ItemDropHandler : MonoBehaviour, IDropHandler
     {
-        private RectTransform _rectTransform;
+        private SlotInfo _slotInfo;
     
-        private void Start()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-        }
+        private void Start() => _slotInfo = GetComponent<SlotInfo>();
+
         public void OnDrop(PointerEventData eventData)
         {
-            print("OnDrop");
-            if (eventData.pointerDrag != null && eventData.pointerDrag.TryGetComponent<ItemDragHandler>(out ItemDragHandler draggedObject))
+            if (eventData.pointerDrag == null ||
+                !eventData.pointerDrag.TryGetComponent(out ItemDragHandler draggedObject)) return;
+            if(_slotInfo.IsEmpty)
             {
-                draggedObject.SetActualParent();
-                transform.localPosition = Vector3.zero;
-                draggedObject.Alpha = 1f;
-                
-                eventData.pointerDrag.GetComponent<RectTransform>().position = _rectTransform.position;
+                _slotInfo.AddItem(draggedObject.GetComponent<SlotInfo>().DropItem());
             }
+            else
+            {
+                draggedObject.GetComponent<SlotInfo>().SwapItems(_slotInfo);
+            }
+            Debug.Log("ondrop");
         }
     }
 }

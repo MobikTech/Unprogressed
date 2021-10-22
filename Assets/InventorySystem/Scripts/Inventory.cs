@@ -8,7 +8,7 @@ namespace Unprogressed.Inventory
     public class Inventory
     {
         private const int _panelSlotAmount = 10;
-        private Slot[] _slots;
+        private SlotInfo[] _slots;
 
         public Inventory() => InitializeInventory();
         
@@ -16,29 +16,22 @@ namespace Unprogressed.Inventory
         /// <summary>
         /// Change finding method of item panel slots to method without byName finding
         /// </summary>
-        private void InitializeInventory()
-        {
-            _slots = new Slot[_panelSlotAmount];
-            ItemDragHandler[] imageObjectComponents = UI.MainCanvas.transform.Find("ItemPanel").GetComponentsInChildren<ItemDragHandler>();
-            for (int i = 0; i < _slots.Length; i++)
-            {
-                _slots[i] = new Slot(imageObjectComponents[i].gameObject.GetComponent<Image>());
-            }
-        }
-        public bool AddItem(Item item)
+        private void InitializeInventory() => _slots = UI.MainCanvas.transform.Find("ItemPanel").GetComponentsInChildren<SlotInfo>();
+
+        public bool TryAddItem(Item item)
         {
             for (int i = 0; i < _slots.Length; i++)
             {
-                if (_slots[i].Item == null)
+                if (_slots[i].IsEmpty)
                 {
-                    _slots[i].ChangeItem(item);
+                    _slots[i].AddItem(item);
                     return true;
                 }
             }
             return false;
         }
         public Item DropItem(int slotNum) => _slots[slotNum].DropItem();
-        public Item DropItem(Slot slot) => slot.DropItem();
+        public Item DropItem(SlotInfo slotInfo) => slotInfo.DropItem();
         //public void DropItem(Item item, int amount)
         //{
         //    if (amount >= _items[item.ItemInfo.ID].Amount)

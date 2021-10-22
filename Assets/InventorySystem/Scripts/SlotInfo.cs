@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace Unprogressed.Inventory
 {
-    public class Slot
+    public class SlotInfo : MonoBehaviour
     {
         private Image _image;
         private Item _item;
-
-        public Item Item => _item;
-        public Image Image => _image;
-
-        public Slot(Image imageOnUI)
+        public bool IsEmpty => _item == null;
+        
+        
+        public void Awake()
         {
-            _image = imageOnUI;
+            _image = GetComponent<Image>();
             ResetImage();
         }
-        public void ChangeItem(Item item)
+
+        public void AddItem(Item item)
         {
             _item = item;
             _image.color = Color.white;
@@ -29,16 +29,19 @@ namespace Unprogressed.Inventory
             ResetImage();
             return item;
         }
-        public void SwapItems(Slot slot)
+        public void SwapItems(SlotInfo slotInfo)
         {
-            Item thisItem = this._item;
-            Image thisImage = this._image;
+            Item tempItem = _item;
+            ChangeItem(slotInfo._item);
+            slotInfo.ChangeItem(tempItem);
+            Debug.Log("swap");
+        }
 
-            this._item = slot._item;
-            slot._item = thisItem;
-
-            this._image = slot._image;
-            slot._image = thisImage;
+        private void ChangeItem(Item item)
+        {
+            _item = item;
+            _image.color = Color.white;
+            _image.sprite = _item.ItemInfo.Icon;
         }
         private void ResetImage()
         {
